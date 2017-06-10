@@ -1,0 +1,16 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: notification-service
+  rabbitmq:
+    password: guest
+    username: guest
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:admin@127.0.0.1:8761/eureka/
+  instance:
+    preferIpAddress: true
