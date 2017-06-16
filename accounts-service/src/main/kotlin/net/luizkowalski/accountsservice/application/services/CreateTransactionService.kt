@@ -2,6 +2,7 @@ package net.luizkowalski.accountsservice.application.services
 
 import net.luizkowalski.accountsservice.application.exceptions.AccountNotFoundException
 import net.luizkowalski.accountsservice.application.exceptions.AmountNotPossibleException
+import net.luizkowalski.accountsservice.application.exceptions.TransactionNotPossibleException
 import net.luizkowalski.accountsservice.application.helpers.UniqueIdGenerator
 import net.luizkowalski.accountsservice.domain.Account
 import net.luizkowalski.accountsservice.domain.Flow
@@ -23,6 +24,8 @@ class CreateTransactionService(
     fun createTransaction(from: String, to: String, amount: Long): Transaction {
         val accountFrom = accountsRepository.findByIban(from) ?: throw AccountNotFoundException("Account not found")
         val accountTo = accountsRepository.findByIban(to) ?: throw AccountNotFoundException("Account not found")
+        if(accountTo.equals(accountFrom))
+            throw TransactionNotPossibleException("You can't send money to yourself")
 
         if (accountFrom.balance < amount)
             throw AmountNotPossibleException("The account $from do not have enough money")
@@ -42,7 +45,7 @@ class CreateTransactionService(
         flowsRepository.save(f)
         accountsRepository.save(arrayListOf(accountFrom, accountTo))
         transactionsRepository.save(arrayListOf(fromTransaction, toTransaction))
-        notificationService.notifyReceived(toTransaction)
+        notificationService.notifyTransaction(toTransaction)
         return fromTransaction
     }
 

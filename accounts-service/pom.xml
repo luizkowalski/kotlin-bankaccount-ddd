@@ -10,7 +10,6 @@
   <packaging>jar</packaging>
 
   <name>Accounts service</name>
-  <description></description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>

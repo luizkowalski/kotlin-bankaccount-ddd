@@ -10,7 +10,7 @@ import javax.persistence.*
 ))
 data class Transaction(
         @Column(length = 1000)
-        var amount: Long? = null,
+        var amount: Long = 0L,
 
         @Column(nullable = false)
         var currency: String = "EUR",

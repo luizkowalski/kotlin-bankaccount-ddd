@@ -8,6 +8,11 @@ spring:
     password: guest
     username: guest
 
+twilio:
+  username: ${TWILIO_USERNAME}
+  password: ${TWILIO_PASSWORD}
+  phoneNumber: ${TWILIO_PHONENUMBER}
+
 eureka:
   client:
     serviceUrl:
