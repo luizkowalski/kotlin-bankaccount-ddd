@@ -16,15 +16,15 @@ class NotificationService(val rabbitTemplate: RabbitTemplate) {
         var number = t.account?.user?.phoneNumber ?: return;
         var text = "You received ${calculateAmountFromCents(t.amount)} on ${formatDate(t.createdAt!!)}"
         var message = mapOf("text" to text, "phoneNumber" to number)
-        rabbitTemplate.convertSendAndReceive("sms-notifications", message)
+        rabbitTemplate.convertAndSend("sms-notifications", message)
     }
 
-    fun calculateAmountFromCents(cents: Long) : String {
-        var f = NumberFormat.getCurrencyInstance(Locale.GERMANY)
-        return f.format(cents/100.0).toString()
+    fun calculateAmountFromCents(cents: Long): String {
+        return NumberFormat
+                .getCurrencyInstance(Locale.GERMANY)
+                .format(cents / 100.0)
+                .toString()
     }
 
-    fun formatDate(date: Date) : String {
-        return DateFormat.getDateTimeInstance().format(date)
-    }
+    fun formatDate(date: Date): String = DateFormat.getDateTimeInstance().format(date)
 }

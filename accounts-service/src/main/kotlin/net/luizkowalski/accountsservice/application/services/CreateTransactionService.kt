@@ -24,7 +24,7 @@ class CreateTransactionService(
     fun createTransaction(from: String, to: String, amount: Long): Transaction {
         val accountFrom = accountsRepository.findByIban(from) ?: throw AccountNotFoundException("Account not found")
         val accountTo = accountsRepository.findByIban(to) ?: throw AccountNotFoundException("Account not found")
-        if(accountTo.equals(accountFrom))
+        if (accountTo.equals(accountFrom))
             throw TransactionNotPossibleException("You can't send money to yourself")
 
         if (accountFrom.balance < amount)
