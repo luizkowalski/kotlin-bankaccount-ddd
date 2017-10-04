@@ -1,4 +1,4 @@
-package net.luizkowalski.accountsservice.domain
+package net.luizkowalski.accountsservice.domain.account
 
 enum class AccountType(val type: Int) {
     CHECKING(0),

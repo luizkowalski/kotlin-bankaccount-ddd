@@ -1,6 +1,7 @@
-package net.luizkowalski.accountsservice.domain
+package net.luizkowalski.accountsservice.domain.account
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import net.luizkowalski.accountsservice.domain.BaseEntity
 import javax.persistence.*
 
 @Entity

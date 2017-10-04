@@ -1,5 +1,6 @@
-package net.luizkowalski.accountsservice.domain
+package net.luizkowalski.accountsservice.domain.account
 
+import net.luizkowalski.accountsservice.domain.BaseEntity
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Index

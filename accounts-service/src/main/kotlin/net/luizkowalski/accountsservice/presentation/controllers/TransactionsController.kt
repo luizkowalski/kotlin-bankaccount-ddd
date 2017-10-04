@@ -2,7 +2,7 @@ package net.luizkowalski.accountsservice.presentation.controllers
 
 import net.luizkowalski.accountsservice.infrastructure.exceptions.AccountNotFoundException
 import net.luizkowalski.accountsservice.infrastructure.exceptions.AmountNotPossibleException
-import net.luizkowalski.accountsservice.application.services.CreateTransactionService
+import net.luizkowalski.accountsservice.domain.account.saga.CreateTransactionSaga
 import net.luizkowalski.accountsservice.presentation.models.TransactionsParam
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/transactions")
-class TransactionsController(val transactionService: CreateTransactionService) {
+class TransactionsController(val transactionService: CreateTransactionSaga) {
 
     @PostMapping
     fun createTransaction(@RequestBody @Validated params: TransactionsParam): ResponseEntity<Any> {
@@ -22,9 +22,9 @@ class TransactionsController(val transactionService: CreateTransactionService) {
             var transaction = transactionService.createTransaction(params.iban, params.recipient, params.amount)
             return ResponseEntity(transaction, HttpStatus.CREATED)
         } catch (e: AmountNotPossibleException) {
-            return ResponseEntity(e.localizedMessage, HttpStatus.CREATED)
+            return ResponseEntity(e.localizedMessage, HttpStatus.PRECONDITION_FAILED)
         } catch (e: AccountNotFoundException) {
-            return ResponseEntity(e.localizedMessage, HttpStatus.BAD_REQUEST)
+            return ResponseEntity(e.localizedMessage, HttpStatus.PRECONDITION_FAILED)
         } catch(e: Exception) {
             return ResponseEntity("An error occurred while finalising your transactions. " +
                     "The money did not leave your account: ${e.localizedMessage}", HttpStatus.BAD_REQUEST)

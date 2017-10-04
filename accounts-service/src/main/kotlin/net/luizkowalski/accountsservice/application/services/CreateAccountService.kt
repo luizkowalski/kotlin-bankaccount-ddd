@@ -1,9 +1,9 @@
 package net.luizkowalski.accountsservice.application.services
 
 import net.luizkowalski.accountsservice.application.helpers.AccountNumberGenerator
-import net.luizkowalski.accountsservice.domain.Account
-import net.luizkowalski.accountsservice.domain.AccountType
-import net.luizkowalski.accountsservice.domain.User
+import net.luizkowalski.accountsservice.domain.account.Account
+import net.luizkowalski.accountsservice.domain.account.AccountType
+import net.luizkowalski.accountsservice.domain.user.User
 import net.luizkowalski.accountsservice.infrastructure.repositories.UsersRepository
 import org.iban4j.CountryCode
 import org.iban4j.Iban

@@ -1,5 +1,7 @@
-package net.luizkowalski.accountsservice.domain
+package net.luizkowalski.accountsservice.domain.user
 
+import net.luizkowalski.accountsservice.domain.BaseEntity
+import net.luizkowalski.accountsservice.domain.account.Account
 import javax.persistence.*
 
 @Entity

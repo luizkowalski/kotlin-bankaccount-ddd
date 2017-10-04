@@ -1,6 +1,6 @@
 package net.luizkowalski.accountsservice.application.services
 
-import net.luizkowalski.accountsservice.domain.Transaction
+import net.luizkowalski.accountsservice.domain.account.Transaction
 import org.springframework.cloud.stream.messaging.Source
 import org.springframework.messaging.support.MessageBuilder
 import org.springframework.scheduling.annotation.Async

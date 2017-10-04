@@ -21,7 +21,7 @@ class AccountsController(val createAccountService: CreateAccountService,
                 return ResponseEntity("User already exists", HttpStatus.BAD_REQUEST)
 
             user = createAccountService.createUser(accountParam.name,
-                    accountParam.email.orEmpty(), accountParam.passportNumber, accountParam.accountType)
+                    accountParam.email, accountParam.passportNumber, accountParam.accountType)
 
             return ResponseEntity(user, HttpStatus.CREATED)
         } catch(e: Exception) {
