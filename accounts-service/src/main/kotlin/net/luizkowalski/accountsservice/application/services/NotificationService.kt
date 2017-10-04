@@ -1,7 +1,8 @@
 package net.luizkowalski.accountsservice.application.services
 
 import net.luizkowalski.accountsservice.domain.Transaction
-import org.springframework.amqp.rabbit.core.RabbitTemplate
+import org.springframework.cloud.stream.messaging.Source
+import org.springframework.messaging.support.MessageBuilder
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import java.text.DateFormat
@@ -9,14 +10,14 @@ import java.text.NumberFormat
 import java.util.*
 
 @Service
-class NotificationService(val rabbitTemplate: RabbitTemplate) {
+class NotificationService(val source: Source) {
 
     @Async
     fun notifyTransaction(t: Transaction) {
         var number = t.account?.user?.phoneNumber ?: return;
         var text = "You received ${calculateAmountFromCents(t.amount)} on ${formatDate(t.createdAt!!)}"
         var message = mapOf("text" to text, "phoneNumber" to number)
-        rabbitTemplate.convertAndSend("sms-notifications", message)
+        source.output().send(MessageBuilder.withPayload(message).build())
     }
 
     fun calculateAmountFromCents(cents: Long): String {

@@ -8,7 +8,7 @@ object AccountNumberGenerator {
 
     fun nextNumber(): String {
         val sb = StringBuilder(14)
-        for (i in 0..14 - 1) {
+        for (i in 0 until 14) {
             sb.append(ALLOWED.toCharArray()[random.nextInt(ALLOWED.length)])
         }
         return sb.toString()

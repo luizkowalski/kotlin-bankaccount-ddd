@@ -11,17 +11,12 @@ spring:
     platform: h2
     url: jdbc:h2:mem:test;MODE=PostgreSQL
   h2.console.enabled: true
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://eureka:admin@127.0.0.1:8761/eureka/
-  instance:
-    preferIpAddress: true
+  cloud.stream:
+    bindings.output.destination: accountNotifications
+    default.contentType: application/json
 
 security.basic.enabled: false
 management.security.enabled: false
-
 
 server:
   compression.enabled: true

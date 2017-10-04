@@ -1,7 +1,7 @@
 package net.luizkowalski.accountsservice.presentation.controllers
 
-import net.luizkowalski.accountsservice.application.exceptions.AccountNotFoundException
-import net.luizkowalski.accountsservice.application.exceptions.AmountNotPossibleException
+import net.luizkowalski.accountsservice.infrastructure.exceptions.AccountNotFoundException
+import net.luizkowalski.accountsservice.infrastructure.exceptions.AmountNotPossibleException
 import net.luizkowalski.accountsservice.application.services.CreateTransactionService
 import net.luizkowalski.accountsservice.presentation.models.TransactionsParam
 import org.springframework.http.HttpStatus

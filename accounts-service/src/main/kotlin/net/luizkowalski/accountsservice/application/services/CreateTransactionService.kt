@@ -1,8 +1,8 @@
 package net.luizkowalski.accountsservice.application.services
 
-import net.luizkowalski.accountsservice.application.exceptions.AccountNotFoundException
-import net.luizkowalski.accountsservice.application.exceptions.AmountNotPossibleException
-import net.luizkowalski.accountsservice.application.exceptions.TransactionNotPossibleException
+import net.luizkowalski.accountsservice.infrastructure.exceptions.AccountNotFoundException
+import net.luizkowalski.accountsservice.infrastructure.exceptions.AmountNotPossibleException
+import net.luizkowalski.accountsservice.infrastructure.exceptions.TransactionNotPossibleException
 import net.luizkowalski.accountsservice.application.helpers.UniqueIdGenerator
 import net.luizkowalski.accountsservice.domain.Account
 import net.luizkowalski.accountsservice.domain.Flow

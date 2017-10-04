@@ -7,15 +7,15 @@ spring:
   rabbitmq:
     password: guest
     username: guest
+  cloud.stream:
+    bindings.input:
+      destination: accountNotifications
+      group: accountNotificationsGroup
 
 twilio:
   username: ${TWILIO_USERNAME}
   password: ${TWILIO_PASSWORD}
   phoneNumber: ${TWILIO_PHONENUMBER}
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://eureka:admin@127.0.0.1:8761/eureka/
-  instance:
-    preferIpAddress: true
+security.basic.enabled: false
+management.security.enabled: false

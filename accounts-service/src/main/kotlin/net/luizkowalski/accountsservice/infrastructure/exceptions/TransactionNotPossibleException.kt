@@ -1,3 +1,3 @@
-package net.luizkowalski.accountsservice.application.exceptions
+package net.luizkowalski.accountsservice.infrastructure.exceptions
 
 class TransactionNotPossibleException(e: String) : RuntimeException(e)
