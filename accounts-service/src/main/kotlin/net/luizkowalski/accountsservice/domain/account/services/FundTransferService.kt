@@ -5,14 +5,16 @@ import net.luizkowalski.accountsservice.infrastructure.exceptions.AccountNotFoun
 import net.luizkowalski.accountsservice.infrastructure.exceptions.NotEnoughFunds
 import net.luizkowalski.accountsservice.infrastructure.repositories.AccountsRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Service
 class FundTransferService(val accountsRepository: AccountsRepository) {
 
+    @Transactional
     fun transfer(origin: String, destination: String, amount: Long, reason: String) {
-        var originAccount = accountsRepository.findByIban(origin) ?: throw AccountNotFoundException("origin account not found")
-        var destinationAccount = accountsRepository.findByIban(destination) ?: throw AccountNotFoundException("destination account not found")
+        var originAccount = accountsRepository.findByIban(origin) ?: throw AccountNotFoundException(origin)
+        var destinationAccount = accountsRepository.findByIban(destination) ?: throw AccountNotFoundException(destination)
 
         if (!originAccount.hasEnoughFunds(amount))
             throw NotEnoughFunds()

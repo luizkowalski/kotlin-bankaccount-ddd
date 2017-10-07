@@ -1,8 +1,7 @@
-package net.luizkowalski.accountsservice.application.services
+package net.luizkowalski.accountsservice.infrastructure.services
 
 import net.luizkowalski.accountsservice.domain.account.Transaction
 import org.springframework.cloud.stream.messaging.Source
-import org.springframework.messaging.support.MessageBuilder
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import java.text.DateFormat

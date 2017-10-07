@@ -15,7 +15,7 @@ class AccountsController(val createAccountService: CreateAccountService,
 
     @PostMapping
     fun createAccount(@RequestBody @Validated accountParam: AccountParam): ResponseEntity<Any> {
-        try {
+        return try {
             var user = usersRepository.findByPassportNumber(accountParam.passportNumber)
             if (user != null)
                 return ResponseEntity("User already exists", HttpStatus.BAD_REQUEST)
@@ -23,9 +23,9 @@ class AccountsController(val createAccountService: CreateAccountService,
             user = createAccountService.createUser(accountParam.name,
                     accountParam.email, accountParam.passportNumber, accountParam.accountType)
 
-            return ResponseEntity(user, HttpStatus.CREATED)
-        } catch(e: Exception) {
-            return ResponseEntity.ok("Something went wrong: ${e.localizedMessage}")
+            ResponseEntity(user, HttpStatus.CREATED)
+        } catch (e: Exception) {
+            ResponseEntity.ok("Something went wrong: ${e.localizedMessage}")
         }
     }
 

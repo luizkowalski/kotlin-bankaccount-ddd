@@ -57,7 +57,7 @@ data class Account(
         registerEvent(TransactionRegisteredEvent(transaction, iban!!))
     }
 
-    fun hasEnoughFunds(amount : Long): Boolean{
-        return balance > amount
+    fun hasEnoughFunds(amount: Long): Boolean {
+        return balance >= amount
     }
 }
