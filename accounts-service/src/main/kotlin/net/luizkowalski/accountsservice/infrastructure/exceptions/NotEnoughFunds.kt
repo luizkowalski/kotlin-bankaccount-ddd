@@ -1,3 +1,3 @@
 package net.luizkowalski.accountsservice.infrastructure.exceptions
 
-class AmountNotPossibleException(e: String) : RuntimeException(e)
+class NotEnoughFunds() : RuntimeException("Not enough funds")

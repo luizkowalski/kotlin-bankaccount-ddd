@@ -12,11 +12,13 @@ import org.hibernate.validator.constraints.Range
 class TransactionsParam {
 
     @NotBlank(message = "please inform IBAN")
-    var iban: String = ""
+    var origin: String = ""
+
+    @NotBlank(message = "Inform the destination")
+    var destination: String = ""
 
     @Range(min = 1, message = "value should be bigger than 0")
     var amount: Long = 0
 
-    @NotBlank(message = "please inform recipient's IBAN")
-    var recipient: String = ""
+    var reason: String = ""
 }

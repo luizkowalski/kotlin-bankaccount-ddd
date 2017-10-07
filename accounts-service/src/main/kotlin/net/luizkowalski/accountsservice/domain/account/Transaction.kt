@@ -1,14 +1,9 @@
 package net.luizkowalski.accountsservice.domain.account
 
-import com.fasterxml.jackson.annotation.JsonIgnore
-import net.luizkowalski.accountsservice.domain.BaseEntity
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Embeddable
 
-@Entity
-@Table(name = "transactions", indexes = arrayOf(
-        Index(name = "idx_on_tid", columnList = "transactionId", unique = true),
-        Index(columnList = "flowId")
-))
+@Embeddable
 data class Transaction(
         @Column(length = 1000)
         var amount: Long = 0L,
@@ -16,13 +11,15 @@ data class Transaction(
         @Column(nullable = false)
         var currency: String = "EUR",
 
-        @ManyToOne
-        @JsonIgnore
-        var account: Account? = null,
+        @Column(nullable = false)
+        var iban: String? = null,
 
         @Column(nullable = false, length = 100)
         var transactionId: String? = null,
 
+        @Column(nullable = false, length = 180)
+        var reason: String = "",
+
         @Column(nullable = false)
         var flowId: String? = null
-) : BaseEntity()
+)

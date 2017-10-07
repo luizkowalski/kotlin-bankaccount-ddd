@@ -14,10 +14,10 @@ class NotificationService(val source: Source) {
 
     @Async
     fun notifyTransaction(t: Transaction) {
-        var number = t.account?.user?.phoneNumber ?: return;
-        var text = "You received ${calculateAmountFromCents(t.amount)} on ${formatDate(t.createdAt!!)}"
-        var message = mapOf("text" to text, "phoneNumber" to number)
-        source.output().send(MessageBuilder.withPayload(message).build())
+//        var number = t.account?.user?.phoneNumber ?: return;
+//        var text = "You received ${calculateAmountFromCents(t.amount)} on ${formatDate(t.createdAt!!)}"
+//        var message = mapOf("text" to text, "phoneNumber" to number)
+//        source.output().send(MessageBuilder.withPayload(message).build())
     }
 
     fun calculateAmountFromCents(cents: Long): String {

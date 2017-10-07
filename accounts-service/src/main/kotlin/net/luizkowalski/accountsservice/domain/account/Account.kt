@@ -1,8 +1,8 @@
 package net.luizkowalski.accountsservice.domain.account
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import net.luizkowalski.accountsservice.domain.account.events.TransactionRegisteredEvent
 import net.luizkowalski.accountsservice.domain.user.User
-import net.luizkowalski.accountsservice.infrastructure.exceptions.AmountNotPossibleException
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.domain.AbstractAggregateRoot
@@ -44,16 +44,20 @@ data class Account(
         @Column(length = 1000)
         var balance: Long = 1000L,
 
-        @OneToMany(mappedBy = "account")
-        var transactions: List<Transaction> = emptyList(),
+        @ElementCollection
+        @CollectionTable(name = "transactions", joinColumns = arrayOf(JoinColumn(name = "account_id")))
+        private var transactions: Set<Transaction> = emptySet(),
 
         @Version
         var version: Int = 0
 ) : AbstractAggregateRoot() {
-    fun createTransaction(ibanDestination: String, amount: Long){
-        if(balance > amount)
-            throw AmountNotPossibleException("");
 
-        balance -= amount
+    fun addTransaction(transaction: Transaction) {
+        transactions = transactions.plus(transaction)
+        registerEvent(TransactionRegisteredEvent(transaction, iban!!))
+    }
+
+    fun hasEnoughFunds(amount : Long): Boolean{
+        return balance > amount
     }
 }
